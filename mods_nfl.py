@@ -23,17 +23,12 @@ def selected_stat_year(driver):
     #print(f"Stat year is {stat_year.text}.")
     return stat_year.text
 
-def barh_chart(pass_yards_tops, qb_tops, top_num, stat_year):
+def barh_chart(data_dict, top_num, stat_year_plot):
     #today = time.strftime("%m.%d.%y")
-    chart_title = f"Top {top_num} Quarterbacks by Yards in {stat_year}"
+    chart_title = f"Top {top_num} Quarterbacks by Yards in {stat_year_plot}"
     #print(f"Selected year is {stat_year}.")
 
-    data = [{
-        'type': 'bar',
-        'orientation': 'h',
-        'x': pass_yards_tops,
-        'y': qb_tops
-        }]
+    data = [data_dict]
 
     layout = {
         'title': {'text': chart_title, 'x': 0.5, 'y': 0.9, 'xanchor':'center', 'yanchor': 'top'},
@@ -41,5 +36,5 @@ def barh_chart(pass_yards_tops, qb_tops, top_num, stat_year):
         'yaxis': {'title': 'QBs', 'autorange': 'reversed'}        
         }
 
-    fig = {'data': data, 'layout': layout}
-    offline.plot(fig, filename='qbs_yds_top_5.html')
+    fig = {'data': data, 'layout': layout}    
+    offline.plot(fig, filename='qbs_yds_top_10.html')
