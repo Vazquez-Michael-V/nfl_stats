@@ -99,19 +99,21 @@ print(df_2019)
 quarterbacks_2019 = list(df_2019['Player'])
 #print(quarterbacks)
 qb_tops_2019 = [quarterbacks_2019[i] for i in range(0,top_num)]
-print(qb_tops_2019)
+#print(qb_tops_2019)
 
 pass_yards_2019 = list(df_2019['Pass Yds'])
 pass_yards_tops_2019 = [pass_yards_2019[i] for i in range(0, top_num)]
-print(pass_yards_tops_2019)
+#print(pass_yards_tops_2019)
 
 #Ask user which year to plot.
-#print(all_stat_years)
-for y in all_stat_years:
+
+print("Available stat years are:")
+for y in all_stat_years:    
     print(y)
     
-year_to_plot = input("Select a year to plot. ") #Put a try block here in case of KeyError.
-stat_year_plot = int(year_to_plot)
+year_to_plot = input("Select a year to plot. ")
+ 
+#Maybe create this dictionary in a for loop using a years list.
 data_dict = {'2019':{'type': 'bar', 'orientation': 'h',
                      'x': pass_yards_tops_2019,
                      'y': qb_tops_2019
@@ -121,7 +123,16 @@ data_dict = {'2019':{'type': 'bar', 'orientation': 'h',
                       'y': qb_tops_2021
                       }          
              }
+try:     
+    # Create the horizontal bar chart.
+    nfl.barh_chart(data_dict, top_num, year_to_plot)
 
-print(data_dict[year_to_plot])
+except KeyError:
+    print(f"{year_to_plot} not an available stat year.")
+    
 
-nfl.barh_chart(data_dict[year_to_plot], top_num, stat_year_plot)
+
+
+
+
+

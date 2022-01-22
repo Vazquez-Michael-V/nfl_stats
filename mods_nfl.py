@@ -23,13 +23,24 @@ def selected_stat_year(driver):
     #print(f"Stat year is {stat_year.text}.")
     return stat_year.text
 
-def barh_chart(data_dict, top_num, stat_year_plot):
+
+def number_yaxis(data_dict, year_to_plot):
+    """Enumerate the yaxis."""
+    for a, t in enumerate(data_dict[year_to_plot]['y'], 1):
+        data_dict[year_to_plot]['y'][a-1] = f"{a}. {t}"
+              
+    return data_dict    
+
+
+def barh_chart(data_dict, top_num, year_to_plot):
     #today = time.strftime("%m.%d.%y")
-    chart_title = f"Top {top_num} Quarterbacks by Yards in {stat_year_plot}"
+    chart_title = f"Top {top_num} Quarterbacks by Yards in {year_to_plot}"
     #print(f"Selected year is {stat_year}.")
 
-    data = [data_dict]
-
+    data_dict = number_yaxis(data_dict, year_to_plot) 
+    data = [data_dict[year_to_plot]]
+    #print(data)
+    
     layout = {
         'title': {'text': chart_title, 'x': 0.5, 'y': 0.9, 'xanchor':'center', 'yanchor': 'top'},
         'xaxis': {'title':'Yards'},
