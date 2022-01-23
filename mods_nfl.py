@@ -1,6 +1,8 @@
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
 import time
+
+import plotly.graph_objs as go
 from plotly import offline
 
 def year_to_click(option_tags, year):
@@ -25,7 +27,8 @@ def selected_stat_year(driver):
 
 
 def number_yaxis(data_dict, year_to_plot):
-    """Enumerate the yaxis."""
+    """Enumerate the list used for the yaxis.
+    Returns a dictionary."""
     for a, t in enumerate(data_dict[year_to_plot]['y'], 1):
         data_dict[year_to_plot]['y'][a-1] = f"{a}. {t}"
               
@@ -34,18 +37,33 @@ def number_yaxis(data_dict, year_to_plot):
 
 def barh_chart(data_dict, top_num, year_to_plot):
     #today = time.strftime("%m.%d.%y")
-    chart_title = f"Top {top_num} Quarterbacks by Yards in {year_to_plot}"
+    #chart_title = f"Top {top_num} Quarterbacks by Yards in {year_to_plot}"
     #print(f"Selected year is {stat_year}.")
 
     data_dict = number_yaxis(data_dict, year_to_plot) 
     data = [data_dict[year_to_plot]]
     #print(data)
     
-    layout = {
-        'title': {'text': chart_title, 'x': 0.5, 'y': 0.9, 'xanchor':'center', 'yanchor': 'top'},
-        'xaxis': {'title':'Yards'},
-        'yaxis': {'title': 'QBs', 'autorange': 'reversed'}        
-        }
+    if year_to_plot == 'Compare 2021 to 2019':
+        chart_title = "Top QBs in 2021 and 2019 - Yards Percentage Change"
+        layout = {
+            'title': {'text': chart_title, 'x': 0.5, 'y': 0.9, 'xanchor':'center', 'yanchor': 'top'},
+            'xaxis': {'title':'Yards', 'tickformat': '.2%'},
+            'yaxis': {'title': 'QBs', 'autorange': 'reversed'}        
+            }
+    else:
+        chart_title = f"Top {top_num} Quarterbacks by Yards in {year_to_plot}"
+        layout = {
+            'title': {'text': chart_title, 'x': 0.5, 'y': 0.9, 'xanchor':'center', 'yanchor': 'top'},
+            'xaxis': {'title':'Yards'},
+            'yaxis': {'title': 'QBs', 'autorange': 'reversed'}        
+            }
+    
+    # layout = {
+    #     'title': {'text': chart_title, 'x': 0.5, 'y': 0.9, 'xanchor':'center', 'yanchor': 'top'},
+    #     'xaxis': {'title':'Yards'},
+    #     'yaxis': {'title': 'QBs', 'autorange': 'reversed'}        
+    #     }
 
-    fig = {'data': data, 'layout': layout}    
+    fig = {'data': data, 'layout': layout}   
     offline.plot(fig, filename='qbs_yds_top_10.html')
