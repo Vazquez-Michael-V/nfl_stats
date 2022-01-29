@@ -117,6 +117,7 @@ def barh_chart(df_colors, year_to_plot, color_default, color_2021, color_2019):
             autorange='reversed'
                         )
         
+        chart_title = f"Top QBs in {year_to_plot}"
         
     elif year_to_plot == '2019':
         df_default = df_colors.loc[df_colors['Bar Color']==color_default]
@@ -145,6 +146,8 @@ def barh_chart(df_colors, year_to_plot, color_default, color_2021, color_2019):
         fig.update_yaxes(
             autorange='reversed'
                         )
+        
+        chart_title = f"Top QBs in {year_to_plot}"
     
     elif year_to_plot == 'Compare 2021 to 2019':
         print(df_colors)
@@ -163,9 +166,10 @@ def barh_chart(df_colors, year_to_plot, color_default, color_2021, color_2019):
     
         fig.update_yaxes(
             autorange='reversed'
-                        )
-    
-    chart_title = "Top QBs Percent Change in Yards from 2019 to 2021"
+                        )    
+        chart_title = "Top QBs Percent Change in Yards from 2019 to 2021"
+        
+        
     fig.update_layout(
         title = {'text': chart_title, 'x': 0.5, 'y': 0.92, 'xanchor':'center', 'yanchor': 'top'},
         xaxis_title="Yards",
