@@ -1,2 +1,2 @@
 # nfl_stats
-Creating charts from NFL website stat tables.
+Web scraping NFL stats.
