@@ -1,2 +1,2 @@
 # nfl_stats
-Web scraping NFL stats.
+Web scraping, charts, and tables with NFL stats.
