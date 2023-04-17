@@ -4,8 +4,8 @@ import pandas as pd
 import numpy as np
 
 
-dirty_files_input_path = r'C:\Users\plott\OneDrive\Desktop\python_work\nfl_stats_project\nfl_stats_project_2023\nfl_stats_outputs\nfl_player_stats_7_outputs\\'
-field_goals_cleaned_output_path = r'C:\Users\plott\OneDrive\Desktop\python_work\nfl_stats_project\nfl_stats_project_2023\nfl_stats_outputs\nfl_player_stats_7_outputs\cleaned_v7_outputs\field_goals_outputs\\'
+dirty_files_input_path = 'some_in_directory'
+field_goals_cleaned_output_path = 'some_out_directory'
 
 df_field_goals = pd.read_csv(f'{dirty_files_input_path}df_field_goals_2021_2022.csv')
 df_field_goals.drop(columns=['Unnamed: 0', 'concat_index'], inplace=True)
